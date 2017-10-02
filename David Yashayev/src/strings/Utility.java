@@ -49,7 +49,7 @@ public class Utility{
 	
 	
 	public static boolean keywordIsIsolated(int psn, String keyword, String s){
-		if(s.indexOf(keyword) + keyword.length() == s.length())
+		if(psn + keyword.length() == s.length())
 			return true;
 		
 		else if(s.substring(psn, psn + keyword.length()+1).compareTo("a") < 0)
@@ -61,9 +61,17 @@ public class Utility{
 		return false;
 	}
 
-	public static boolean noNegations(String s, int psn){
-		return true;
-	}
+	 public static boolean noNegations(String s, int psn){
+		  String not = "not";
+		  String no = "no";
+		  if(psn == 0) {
+			  return true;
+		  }
+		  if(psn > 3 && not.equals(s.substring(psn-4,psn-1)) || no.equals(s.substring(psn-3, psn-1))) {
+			  return false;
+		  }
+		  return true;
+	  }
 
 
 	public static String getInput(){
