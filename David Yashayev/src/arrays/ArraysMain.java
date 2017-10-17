@@ -8,35 +8,107 @@ public class ArraysMain {
 	private int[] intRay;
 	
 	public ArraysMain() {
-		intRay = new int[90000];
+		intRay = new int[5];
+		int[] consecTest1 = {1,2,3,6,7,8,9,10,11,45,46,47};
+		int[] consecTest2 = {10,11,12,13,14,15,6,7,8,9,10,11,45,46,47};
+		int[] randomRolls = new int[1000];
+		populate(randomRolls);
+		
+		System.out.println("The longest sequence in the first test is " + longestConsecutiveSequence(consecTest1));
+		System.out.println("The longest sequence in the second test is " + longestConsecutiveSequence(consecTest2));
+		System.out.println("The longest sequence in the third test is " + longestConsecutiveSequence(randomRolls));
+	//
 	//	populate(intRay);
 	//	checkOccurences(intRay, 3, 18);
 		populate1ToN(intRay);
-		//swap(intRay, 5, 1);
-		shuffle(intRay);
+	//	swap(intRay, 5, 1);
+	//	shuffle(intRay);
+	//	reverseOrder(intRay);
+	//	countLessThan(intRay, 2);
+	//	frontToBack(intRay);
+	//	cycleThrough(intRay, 5);
+		
 		//Arrays is a utility class
-		System.out.println(Arrays.toString(intRay));	
+		//System.out.println(Arrays.toString(randomRolls));	
 	}
 	
-	private void shuffle(int[] arr) {
+	public int countLessThan(int[] arr, int n) {
+		int result = 0;
+			for(int value: arr) {
+				if(value < n)result++;
+			}
+		return result;
+	}
+	
+	public int[] longestConsecSeqAndPos(int[] arr) {
+		int[] data = new int[2];
+		data[0] = longestConsecutiveSequence(arr);
+		data[1] = ;
+		return data;
+	}
+	
+	public int longestConsecutiveSequence(int[] arr) {
+		int currentCount = 1;
+		int longestCount = 1;
+			for(int i = 0; i < arr.length-1; i++) {
+				if(nextIsSequence(arr, i)) {
+					currentCount++;
+				} else
+					currentCount = 1;
+				if(longestCount < currentCount) {
+					longestCount = currentCount;
+				}
+			}
+		return longestCount;
+	}
+	
+	public boolean nextIsSequence(int[] arr, int start) {
+		if(arr[start] == arr[start+1]-1)
+			return true;
+		return false;
+	}
+	
+	
+	public void cycleThrough(int[] arr, int n) {
+		for(int i = 0; i < n; i++) {
+			frontToBack(arr);
+		}
+	}
+	
+	public void frontToBack(int[] arr) {
+		int first = arr[0];
+			for(int i = 0; i < arr.length-1; i++ ) {
+				arr[i] = arr[i+1];
+			}
+		arr[arr.length - 1] = first;
+	}
+	
+	public void shuffle(int[] arr) {
 		for(int i = 0; i < arr.length; i++) {
 			swap(arr,(int)(Math.random()*arr.length), (int)(Math.random()*arr.length));
 		}
 	}
-
-	private void swap(int[] arr, int item1, int item2) {
+	
+	public int[] reverseOrder(int[] arr) {
+		int[] newArr = new int[arr.length];
+		for(int i = 0; i < arr.length; i++) {
+			newArr[i] = arr[arr.length -1-i];
+		}
+		return newArr;
+	}
+	public void swap(int[] arr, int item1, int item2) {
 		int temp = arr[item1];
 		arr[item1] = arr[item2];
 		arr[item2] = temp;
 	}
 
-	private void populate1ToN(int[] intRay) {
+	public void populate1ToN(int[] intRay) {
 		for(int i = 0; i < intRay.length; i++) {
 			intRay[i] = i + 1;
 		}
 	}
 
-	private void checkOccurences(int[] arr, int start, int end) {
+	public void checkOccurences(int[] arr, int start, int end) {
 		int[] counter = new int[end-start+1]; 
 			for(int value: arr) {
 				counter[value-start]++;
@@ -46,7 +118,7 @@ public class ArraysMain {
 			}
 	}
 
-	private void populate(int[] intRay) {
+	public void populate(int[] intRay) {
 		for(int i = 0; i < intRay.length; i++) {
 			intRay[i] = diceRoll(3);
 		}
