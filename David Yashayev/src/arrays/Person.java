@@ -24,4 +24,22 @@ public class Person {
 		return "My name is " + firstName + " " + lastName + " and I live in " + home + ".";
 	}
 	
+	public static String createNickname(String name) {
+		
+		int vowelCount = 0;
+			for(int i = 0; i < name.length(); i++) {
+				String check = name.substring(i,i+1);
+					if(vowelCount < 2 && isVowel(check)) {
+						vowelCount++;
+					}else if(isVowel(check))
+						return name.substring(0,i);
+			}
+			return name;
+		}
+	
+	public static boolean isVowel(String a) {
+		if(a.equals("a") || a.equals("e") || a.equals("i") || a.equals("o") || a.equals("u"))
+			return true;
+		return false;
+	}
 }
