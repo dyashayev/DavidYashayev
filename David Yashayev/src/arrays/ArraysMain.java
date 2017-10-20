@@ -43,7 +43,6 @@ public class ArraysMain {
 	public int[] longestConsecSeqAndPos(int[] arr) {
 		int[] data = new int[2];
 		data[0] = longestConsecutiveSequence(arr);
-		data[1] = ;
 		return data;
 	}
 	
