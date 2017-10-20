@@ -13,23 +13,45 @@ public class Person {
 	private String firstName;
 	private String lastName;
 	private Borough home;
+	private String nickname;
 	
 	public Person(String first, String last, Borough home) {
 		this.firstName = first;
 		this.lastName = last;
 		this.home = home;
+		this.nickname = createNickname(firstName);
 	}
 	
+	
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+		nickname = createNickname(firstName);
+	}
+
+
+
 	public String toString() {
-		return "My name is " + firstName + " " + lastName + " and I live in " + home + ".";
+		return "My name is " + firstName + " " + lastName + ", call me " + nickname + " and I live in " + home + ".";
 	}
 	
+	//JAVA IS PASS-BY-VALUE
+	//this means: the parameters of a method are just values,
+	//not references. if you change those values, the original
+	//object is the same. In this case, 'name' will not be changed.
+	//In fact nothing can change this.firstName via name (local variable)
 	public static String createNickname(String name) {
 		
 		int vowelCount = 0;
 			for(int i = 0; i < name.length(); i++) {
 				String check = name.substring(i,i+1);
-					if(vowelCount < 2 && isVowel(check)) {
+					if(vowelCount < 0 && isVowel(check)) {
 						vowelCount++;
 					}else if(isVowel(check))
 						return name.substring(0,i);
