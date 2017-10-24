@@ -6,4 +6,8 @@ public class Inventory {
 		
 	}
 
+	public void updateMap() {
+		
+	}
+
 }
