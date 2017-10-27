@@ -32,7 +32,7 @@ public class CaveRoom {
 			for(int i = 0; i < doors.length; i++) {
 				if(doors[i] != null) {
 					doorFound = true;
-					directions += "\n  There is a " + doors[i].getDescription + " to " + toDirection(i) + ". " + doors[i].getDetails();
+					directions += "\n  There is a " + doors[i].getDescription() + " to " + toDirection(i) + ". " + doors[i].getDetails();
 				}
 				
 			}
@@ -46,6 +46,9 @@ public class CaveRoom {
 	 *	toDirection(0) -> "the North"
 	 * etc
 	 */
+	public String getDescription() {
+		return description + "\n" + description;
+	}
 	
 	public static String toDirection(int dir) {
 		String[] arr = {"the North","the East","the South","the West"};
@@ -84,7 +87,7 @@ public class CaveRoom {
 	}
 
 	public void interpretInput(String input) {
-		while(isValid(input)) {
+		while(!isValid(input)) {
 			System.out.println("You can only enter 'w' , 'a' , 's' or 'd'.");
 			input = CaveExplorer.in.nextLine();
 		}
@@ -104,23 +107,39 @@ public class CaveRoom {
 	}
 	
 	/**
-	 * This will be where yyour group sets up all the 
+	 * This will be where your group sets up all the 
 	 * caves and all the connections
 	 */
 	
 	public static void setUpCaves() {
+		//All of this code can be changed
+		//1. Decide how big your caves should be
+		CaveExplorer.caves = new CaveRoom[5][5];
+		//2. Populate with caves and a default description
+		//Hint: when starting, use coordinates
 		
+		for(int row = 0; row < CaveExplorer.caves.length;row++) {
+			//PLEASE PAY ATTENTION TO THE DIFFERENCE:
+			for(int col = 0; col < CaveExplorer.caves[row].length;col++) {
+				//create a "default" cave
+				CaveExplorer.caves[row][col] = new CaveRoom("This cave has coords ("+row+ ", " + col+")"); 
+			}
+		}
+		//3. Replace default rooms with custom rooms
+		//- - - We will do this later
+		
+		//4. Set your starting room:
+		CaveExplorer.currentRoom = CaveExplorer.caves[0][1];
+		CaveExplorer.currentRoom.enter();
+		//5. Set up doors
+		CaveRoom[][] c = CaveExplorer.caves;
+		c[0][1].setConnection(SOUTH, c[1][1],new Door());
 	}
 	
 	private boolean isValid(String input) {
 		String validEntries = "wdsa";
 		return validEntries.indexOf(input) > -1 && input.length() == 1;
 	}
-	
-	public String getDescription() {
-		return description;
-	}
-
 
 	public void setDescription(String description) {
 		this.description = description;
@@ -152,5 +171,6 @@ public class CaveRoom {
 		//note: by default, arrays will populate with 'null' meaning there are no connections
 		borderingRooms = new CaveRoom[4];
 		doors = new Door[4];
+		setDirections();
 	}
 }

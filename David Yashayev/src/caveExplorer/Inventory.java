@@ -10,4 +10,7 @@ public class Inventory {
 		
 	}
 
+	public String getDescription() {
+		return "You have nothing in you inventory";
+	}
 }
