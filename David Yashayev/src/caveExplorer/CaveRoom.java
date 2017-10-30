@@ -173,4 +173,12 @@ public class CaveRoom {
 		doors = new Door[4];
 		setDirections();
 	}
+
+	public Door getDoor(int direction) {
+		return doors[direction];
+	}
+
+	public String getDirections() {
+		return directions;
+	}
 }
