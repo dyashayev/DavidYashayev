@@ -100,7 +100,7 @@ public class CaveRoom {
 	}
 	
 	public void printAllowedEntry() {
-		System.out.println("You can only enter 'w' , 'a' , 's' or 'd'.");
+		CaveExplorer.print("You can only enter 'w' , 'a' , 's' or 'd'.");
 	}
 	
 	public void respondToKey(int direction) {
@@ -124,7 +124,7 @@ public class CaveRoom {
 	 */
 	
 	public void performAction(int direction) {
-		System.out.println("That key does nothing.");
+		CaveExplorer.print("That key does nothing.");
 	}
 
 	/**
