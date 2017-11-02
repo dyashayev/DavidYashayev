@@ -27,7 +27,7 @@ public class NPCRoom extends CaveRoom{
 	}
 	
 	/**
-	 * theres already a method like this, but to make it easier to think about it
+	 * there's already a method like this, but to make it easier to think about it
 	 * we create this to check for an NPC.
 	 * If I decide to change the rules for the NPC's this will make it easier of canEnter();
 	 * @return
@@ -73,7 +73,11 @@ public class NPCRoom extends CaveRoom{
 		if(containsNPC() && !presentNPC.isActive()) {
 			return super.getDescription() +"\n"+presentNPC.getInactiveDescription();
 		}else {
-			return super.getDescription() +"\n"+presentNPC.getActiveDescription();
+			String npcDesc = "";
+			if(presentNPC != null) {
+				npcDesc = presentNPC.getActiveDescription();
+			}
+			return super.getDescription() +"\n"+npcDesc;
 		}
 	}
 }
