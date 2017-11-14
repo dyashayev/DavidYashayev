@@ -1,17 +1,17 @@
 package javaTheHardWay;
 
-public class Enviroment {
+public class Environment {
 	
 	private int plants;
 	private int growthRate;
 
-	public Enviroment(int plants) {
+	public Environment(int plants) {
 		this.plants = plants;
 		this.growthRate = plants/2;
 	}
 
 	public static void main(String[] args) {
-		Enviroment farm = new Enviroment(10);
+		Environment farm = new Environment(10);
 		System.out.println(farm);
 		farm.growPlants();
 	}
